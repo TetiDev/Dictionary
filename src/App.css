@@ -1,3 +1,5 @@
+@import '~antd/dist/antd.css';
+
 :root{
   --main-font: "Lato";
   --second-font: 'Paytone One';
@@ -15,8 +17,8 @@ body {
   font-family: var(--main-font), sans-serif;
   /*font-family: var(--second-font), sans-serif;*/
   padding: 20px;
-  width: 500px;
-  margin: 0 auto;
+  width: 500px !important;
+  margin: 0 auto !important;
   color: #141645;
 }
 
@@ -30,6 +32,7 @@ a {
   cursor: pointer;
 }
 input {outline: 0 !important;}
+
 
 .header_search{
   color: #141645;
@@ -142,4 +145,13 @@ align-items: center;
 }
 .footer{
   text-align: center;
+}
+
+.block_photo{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  row-gap: 10px;
+  column-gap: 20px;
 }

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import './tabs.css';
 import axios from 'axios';
 import { Search } from './Search';
 import { Footer } from './Footer';
 import { Body } from './Body';
-import { AxiosResponseType } from './AxiosResponseType';
+import { AxiosPexelsType, AxiosResponseType } from './AxiosResponseType';
 
 function App() {
   const [word, setWord] = useState('');
@@ -15,15 +16,23 @@ function App() {
     phonetics: [],
   });
   const [visible, setVisible] = useState(false);
+  const [dataPexels, setDataPexels] = useState<AxiosPexelsType>({
+    photos: [],
+  });
 
   useEffect(() => {
     (
       async () => {
         const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
+        const urlPexels = `https://api.pexels.com/v1/search?query=${word}&per_page=10`;
+
         try {
           const response = await axios.get(url);
+          const responsePexels = await axios.get(urlPexels, { headers: { Authorization: '563492ad6f91700001000001e0301533c7f94b83ad764347fac773be' } });
           console.log(response);
+          console.log(responsePexels);
           setData(response.data[0]);
+          setDataPexels(responsePexels.data);
         } catch (e) {
           console.log('This is an error!');
         }
@@ -40,7 +49,7 @@ function App() {
         <div className="App">
             <Search onChange={handlerWordChange}/>
             { visible
-              ? <Body word={word} data={data} />
+              ? <Body word={word} data={data} dataPexels={dataPexels}/>
               : null
             }
             <Footer/>

@@ -14,9 +14,24 @@ type PhoneticsType = {
 type MeaningsType = {
   partOfSpeech: string;
   definitions: DefinitionsType[];
+  synonyms: string [];
 };
 
 type DefinitionsType = {
   definition: string;
   example: string
+};
+
+export type AxiosPexelsType = {
+  photos: PexelsType[];
+};
+
+type PexelsType = {
+  id: number,
+  src: SrcType,
+  photographer: string
+};
+
+type SrcType = {
+  original: string,
 };

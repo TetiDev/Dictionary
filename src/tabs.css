@@ -1,0 +1,26 @@
+:root{
+  --primary-color: #141645;
+  --second-color: #E77087;
+}
+
+.ant-tabs-tab{
+  font-size: 24px;
+}
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn{
+  color: var(--primary-color);
+
+  font-weight: bold;
+}
+
+.ant-tabs-ink-bar{
+  background: var(--second-color);
+}
+
+.ant-tabs-tab:hover{
+  color: var(--primary-color);
+}
+
+.ant-tabs-tab-btn:focus, .ant-tabs-tab-remove:focus, .ant-tabs-tab-btn:active, .ant-tabs-tab-remove:active{
+  color: var(--primary-color);
+}
