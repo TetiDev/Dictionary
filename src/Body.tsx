@@ -20,6 +20,7 @@ export const Body: React.FC<NounProps> = (props) => {
 
   const startVoice = async () => {
     const audio = new Audio(props.data.phonetics[0].audio);
+    // console.log(props.data.phonetics[0].audio);
     await audio.play();
   };
 
