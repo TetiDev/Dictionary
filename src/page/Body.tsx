@@ -2,8 +2,8 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { Tabs } from 'antd';
-import { AxiosPexelsType, AxiosResponseType } from './AxiosResponseType';
-import { Capitalize } from './capitalize';
+import { AxiosPexelsType, AxiosResponseType } from '../AxiosResponseType';
+import { Capitalize } from '../capitalize';
 
 type NounProps = {
   word: string;
@@ -37,8 +37,8 @@ export const Body: React.FC<NounProps> = (props) => {
           </div>
   ));
   const prepareDataPhotos = () => props.dataPexels.photos.map((elem, index) => (
-      <div className='col-sm-6 mb-2'>
-        <img src={elem.src.original} style={{ }} key={index} className='img-fluid' alt='img'/>
+      <div className='col-sm-6 mb-2' key={index}>
+        <img src={elem.src.original} style={{ }} className='img-fluid' alt='img'/>
       </div>
   ));
   return (
@@ -78,6 +78,15 @@ export const Body: React.FC<NounProps> = (props) => {
                               }
                             </div>
                         </div>
+                        </div>
+                    </TabPane>
+                    <TabPane tab="Translate" key="4">
+                        <div className="block_style block_style_white mb-4 mt-4" >
+                            <div className='block_trans' >
+                                <div className='row'>
+                                   There will be translate
+                                </div>
+                            </div>
                         </div>
                     </TabPane>
                 </Tabs>
