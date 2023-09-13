@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { Tabs } from 'antd';
+import type { TabsProps } from 'antd';
 import { AxiosPexelsType, AxiosResponseType } from '../AxiosResponseType';
 import { Capitalize } from '../capitalize';
 
@@ -9,11 +10,10 @@ type NounProps = {
   word: string;
   data: AxiosResponseType;
   dataPexels: AxiosPexelsType;
+  dataTranslate: string
 };
 
 export const Body: React.FC<NounProps> = (props) => {
-  const { TabPane } = Tabs;
-
   const onChange = (key: string) => {
     console.log(key);
   };
@@ -24,23 +24,54 @@ export const Body: React.FC<NounProps> = (props) => {
     await audio.play();
   };
 
+  const prepareDataDefinitions = () => props.data.meanings.map((elem, index) => (
+        <div className="block_style block_style_white mb-4 mt-4" key={index}>
+            <p className='part_of_speech mb-2'>{Capitalize(elem.partOfSpeech)}</p>
+            {elem.definitions.map((subElem, index2) => <div key={index2} className='definition_num'><span className='numeric'>{index2 + 1}.</span> {subElem.definition}</div>)}
+        </div>
+  ));
+
   const prepareDataSynonimys = () => props.data.meanings.map((elem, index) => (
-      <div className="block_style block_style_white mb-4 mt-4" key={index}>
+    !!elem.synonyms.length && <div className="block_style block_style_white mb-4 mt-4" key={index}>
           {elem.synonyms.map((subElem, index2) => <div key={index2} className='synonyms_num'><span className='numeric'>{index2 + 1}.</span> {subElem}</div>)}
       </div>
   ));
 
-  const prepareDataDefinitions = () => props.data.meanings.map((elem, index) => (
-          <div className="block_style block_style_white mb-4 mt-4" key={index}>
-              <p className='part_of_speech mb-2'>{Capitalize(elem.partOfSpeech)}</p>
-              {elem.definitions.map((subElem, index2) => <div key={index2} className='definition_num'><span className='numeric'>{index2 + 1}.</span> {subElem.definition}</div>)}
-          </div>
-  ));
   const prepareDataPhotos = () => props.dataPexels.photos.map((elem, index) => (
       <div className='col-sm-6 mb-2' key={index}>
         <img src={elem.src.original} style={{ }} className='img-fluid' alt='img'/>
       </div>
   ));
+
+  const prepareDataTranslate = () => (
+    <div className="block_style block_style_white mb-4 mt-4">
+        <div className='translate'><span className='numeric'>1.</span> {props.dataTranslate}</div>
+    </div>
+  );
+
+  const items: TabsProps['items'] = [
+    {
+      key: '1',
+      label: 'Definitions',
+      children: prepareDataDefinitions(),
+    },
+    {
+      key: '2',
+      label: 'Synonimys',
+      children: prepareDataSynonimys(),
+    },
+    {
+      key: '3',
+      label: 'Photos',
+      children: prepareDataPhotos(),
+    },
+    {
+      key: '4',
+      label: 'Translate',
+      children: prepareDataTranslate(),
+    },
+  ];
+
   return (
       <>
         <div className="block_style block_style__color mt-3 mb-3">
@@ -58,38 +89,7 @@ export const Body: React.FC<NounProps> = (props) => {
 
       <div className="block_meanings">
             <div>
-                <Tabs defaultActiveKey="1" onChange={onChange}>
-                    <TabPane tab="Definitions" key="1">
-                        {
-                            prepareDataDefinitions()
-                        }
-                    </TabPane>
-                    <TabPane tab="Synonimys" key="2">
-                        {
-                            prepareDataSynonimys()
-                        }
-                    </TabPane>
-                    <TabPane tab="Photos" key="3">
-                        <div className="block_style block_style_white mb-4 mt-4" >
-                            <div className='block_photo' >
-                                <div className='row'>
-                              {
-                                prepareDataPhotos()
-                              }
-                            </div>
-                        </div>
-                        </div>
-                    </TabPane>
-                    <TabPane tab="Translate" key="4">
-                        <div className="block_style block_style_white mb-4 mt-4" >
-                            <div className='block_trans' >
-                                <div className='row'>
-                                   There will be translate
-                                </div>
-                            </div>
-                        </div>
-                    </TabPane>
-                </Tabs>
+                <Tabs defaultActiveKey="1" onChange={onChange} items={items} ></Tabs>
             </div>
       </div>
       </>
