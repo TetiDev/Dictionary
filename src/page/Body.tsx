@@ -7,37 +7,36 @@ import { AxiosPexelsType, AxiosResponseType } from '../AxiosResponseType';
 import { Capitalize } from '../capitalize';
 
 type NounProps = {
-  word: string;
   data: AxiosResponseType;
   dataPexels: AxiosPexelsType;
   dataTranslate: string
 };
 
-export const Body: React.FC<NounProps> = (props) => {
+export const Body: React.FC<NounProps> = ({ data, dataPexels, dataTranslate }) => {
   const onChange = (key: string) => {
     console.log(key);
   };
 
   const startVoice = async () => {
-    const audio = new Audio(props.data.phonetics[0].audio);
+    const audio = new Audio(data.phonetics[0].audio);
     // console.log(props.data.phonetics[0].audio);
     await audio.play();
   };
 
-  const prepareDataDefinitions = () => props.data.meanings.map((elem, index) => (
+  const prepareDataDefinitions = () => data.meanings.map((elem, index) => (
         <div className="block_style block_style_white mb-4 mt-4" key={index}>
             <p className='part_of_speech mb-2'>{Capitalize(elem.partOfSpeech)}</p>
             {elem.definitions.map((subElem, index2) => <div key={index2} className='definition_num'><span className='numeric'>{index2 + 1}.</span> {subElem.definition}</div>)}
         </div>
   ));
 
-  const prepareDataSynonimys = () => props.data.meanings.map((elem, index) => (
+  const prepareDataSynonimys = () => data.meanings.map((elem, index) => (
     !!elem.synonyms.length && <div className="block_style block_style_white mb-4 mt-4" key={index}>
           {elem.synonyms.map((subElem, index2) => <div key={index2} className='synonyms_num'><span className='numeric'>{index2 + 1}.</span> {subElem}</div>)}
       </div>
   ));
 
-  const prepareDataPhotos = () => props.dataPexels.photos.map((elem, index) => (
+  const prepareDataPhotos = () => dataPexels.photos.map((elem, index) => (
       <div className='col-sm-6 mb-2' key={index}>
         <img src={elem.src.original} style={{ }} className='img-fluid' alt='img'/>
       </div>
@@ -45,7 +44,7 @@ export const Body: React.FC<NounProps> = (props) => {
 
   const prepareDataTranslate = () => (
     <div className="block_style block_style_white mb-4 mt-4">
-        <div className='translate'><span className='numeric'>1.</span> {props.dataTranslate}</div>
+        <div className='translate'><span className='numeric'>1.</span>{dataTranslate}</div>
     </div>
   );
 
@@ -76,14 +75,14 @@ export const Body: React.FC<NounProps> = (props) => {
       <>
         <div className="block_style block_style__color mt-3 mb-3">
             <div className='current_word'>
-                <p>{props.data.word ? Capitalize(props.data.word) : ''}</p>
+                <p>{data.word ? Capitalize(data.word) : ''}</p>
                 <div className={'word_phonetic__speek'}>
                     <FontAwesomeIcon icon={solid('volume-high')} onClick={startVoice}/>
                 </div>
             </div>
             <div className='word_phonetic mt-3'>
                 <span style={{ color: '#E77087', marginRight: '20px' }}>Phonetic</span>
-                <span style={{ color: 'white' }}>{props.data.phonetic}</span>
+                <span style={{ color: 'white' }}>{data.phonetic}</span>
             </div>
         </div>
 
