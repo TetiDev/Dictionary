@@ -26,10 +26,11 @@ export type AxiosPexelsType = {
   photos: PexelsType[];
 };
 
-type PexelsType = {
+export type PexelsType = {
   id: number,
   src: SrcType,
   photographer: string
+  url: string
 };
 
 type SrcType = {
