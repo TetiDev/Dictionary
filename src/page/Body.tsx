@@ -27,15 +27,18 @@ export const Body: React.FC<NounProps> = ({ data, dataPexels, dataTranslate }) =
   const prepareDataDefinitions = () => data.meanings.map((elem, index) => (
         <div className="block_style block_style_white mb-4 mt-4" key={index}>
             <p className='part_of_speech mb-2'>{Capitalize(elem.partOfSpeech)}</p>
-            {elem.definitions.map((subElem, index2) => <div key={index2} className='definition_num'><span
-                className='numeric'>{index2 + 1}.</span> {subElem.definition}</div>)}
+            {elem.definitions.map((subElem, index2) => <div key={index2} className={'definition'}>
+                <div className='definition_num'>
+                    <span className='numeric'>{index2 + 1}.</span> {subElem.definition}</div>
+                {subElem.example && <p className={'sentence'}>"{subElem.example}"</p>}
+            </div>)}
         </div>
   ));
 
   const prepareDataSynonimys = () => data.meanings.map((elem, index) => (
     !!elem.synonyms.length && <div className="block_style block_style_white mb-4 mt-4" key={index}>
-            {elem.synonyms.map((subElem, index2) => <div key={index2} className='synonyms_num'><span
-                className='numeric'>{index2 + 1}.</span> {subElem}</div>)}
+            {elem.synonyms.map((subElem, index2) => <div key={index2} className='synonyms_num'>
+                <span className='numeric'>{index2 + 1}.</span> {subElem}</div>)}
         </div>
   ));
 
@@ -91,7 +94,6 @@ export const Body: React.FC<NounProps> = ({ data, dataPexels, dataTranslate }) =
                     <span style={{ color: 'white' }}>{data.phonetic}</span>
                 </div>
             </div>
-
             <div className="block_meanings">
                 <div>
                     <Tabs defaultActiveKey="1" onChange={onChange} items={items}></Tabs>

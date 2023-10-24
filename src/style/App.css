@@ -133,17 +133,28 @@ align-items: center;
   color: #999AA9;
 }
 
+.definition{
+  margin-bottom: 10px;
+}
+
 .definition_num{
+  width: 100%;
   display: flex;
   justify-content: left;
   align-items: flex-start;
-  margin-bottom: 10px;
 }
 
 .numeric{
   color: #E77087;
   margin-right: 10px;
+  width: 10px;
 }
+
+.sentence{
+  margin-left: 20px;
+  font-weight: 600;
+}
+
 .footer{
   text-align: center;
 }

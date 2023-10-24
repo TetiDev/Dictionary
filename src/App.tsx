@@ -38,6 +38,7 @@ function App() {
       async () => {
         const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
         const urlPexels = `https://api.pexels.com/v1/search?query=${word}&per_page=10`;
+
         try {
           const response = await axios.get(url);
           const responsePexels = await axios.get(urlPexels, { headers: { Authorization: process.env.REACT_APP_PEXELS } });

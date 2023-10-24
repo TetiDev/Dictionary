@@ -35,4 +35,5 @@ export type PexelsType = {
 
 type SrcType = {
   original: string,
+  small: string
 };
