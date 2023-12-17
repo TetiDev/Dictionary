@@ -18,7 +18,7 @@ function srcset(image: string, size: number, rows = 1, cols = 1) {
 
 export const QuiltedImageList: FC<IImage> = ({ dataImage }) => (
         <ImageList
-            sx={{ width: 500, height: 450 }}
+            sx={{ width: '100%', height: 450 }}
             variant="quilted"
             cols={4}
             rowHeight={121}

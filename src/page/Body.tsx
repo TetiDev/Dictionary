@@ -42,7 +42,11 @@ export const Body: React.FC<NounProps> = ({ data, dataPexels, dataTranslate }) =
         </div>
   ));
 
-  const prepareDataPhotos = () => <QuiltedImageList dataImage={dataPexels.photos}/>;
+  const prepareDataPhotos = () => (
+      <div className="block_style  mb-4 mt-4">
+        <QuiltedImageList dataImage={dataPexels.photos}/>
+      </div>
+  );
   // dataPexels.photos.map((elem, index) => (
   //   <div className='col-sm-6 mb-2' key={index}>
   //       <img src={elem.src.original} style={{}} className='img-fluid' alt='img'/>
@@ -85,7 +89,6 @@ export const Body: React.FC<NounProps> = ({ data, dataPexels, dataTranslate }) =
                 <div className='current_word'>
                     <p>{data.word ? Capitalize(data.word) : ''}</p>
                     <div className={'word_phonetic__speek'}>
-                        {/* <FontAwesomeIcon icon={'volume-high'} onClick={startVoice}/> */}
                         <FontAwesomeIcon icon={icon({ name: 'volume-high' })} onClick={startVoice}/>
                     </div>
                 </div>
