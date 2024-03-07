@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 import type { TabsProps } from 'antd';
-import { Tabs } from 'antd';
+import { Empty, Tabs } from 'antd';
 import { AxiosPexelsType, AxiosResponseType } from '../AxiosResponseType';
 import { Capitalize } from '../capitalize';
 import { QuiltedImageList } from '../component/Image';
@@ -47,29 +47,26 @@ export const Body: React.FC<NounProps> = ({ data, dataPexels, dataTranslate }) =
         <QuiltedImageList dataImage={dataPexels.photos}/>
       </div>
   );
-  // dataPexels.photos.map((elem, index) => (
-  //   <div className='col-sm-6 mb-2' key={index}>
-  //       <img src={elem.src.original} style={{}} className='img-fluid' alt='img'/>
-  //   </div>
-  // ));
 
   const prepareDataTranslate = () => (
-        <div className="block_style block_style_white mb-4 mt-4">
+    dataTranslate
+      ? <div className="block_style block_style_white mb-4 mt-4">
             <div className='translate'><span className='numeric'>1.</span>{dataTranslate}</div>
         </div>
+      : <Empty />
   );
 
   const items: TabsProps['items'] = [
     {
       key: '1',
       label: 'Definitions',
-      children: prepareDataDefinitions(),
+      children: prepareDataDefinitions().filter((elem) => elem).length ? prepareDataDefinitions() : <Empty />,
 
     },
     {
       key: '2',
       label: 'Synonimys',
-      children: prepareDataSynonimys(),
+      children: prepareDataSynonimys().filter((elem) => elem).length ? prepareDataSynonimys() : <Empty />,
     },
     {
       key: '3',

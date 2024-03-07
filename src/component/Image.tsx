@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 // import { dark } from '@mui/material/styles/createPalette';
 import { ImageList, ImageListItem } from '@mui/material';
+import { Empty } from 'antd';
 import { PexelsType } from '../AxiosResponseType';
 
 interface IImage {
@@ -17,7 +18,8 @@ function srcset(image: string, size: number, rows = 1, cols = 1) {
 }
 
 export const QuiltedImageList: FC<IImage> = ({ dataImage }) => (
-        <ImageList
+  dataImage.length
+    ? <ImageList
             sx={{ width: '100%', height: 450 }}
             variant="quilted"
             cols={4}
@@ -33,4 +35,5 @@ export const QuiltedImageList: FC<IImage> = ({ dataImage }) => (
                 </ImageListItem>
             ))}
         </ImageList>
+    : <Empty/>
 );
