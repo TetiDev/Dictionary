@@ -11,7 +11,7 @@ import { AxiosPexelsType, AxiosResponseType } from './AxiosResponseType';
 import { Capitalize } from './capitalize';
 
 const DivStyled = styled.div`
-  width: 600px;
+  width: 500px;
   margin: 0 auto !important;
 
   @media (max-width: 768px) {
@@ -52,6 +52,7 @@ function App() {
 
       const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
       const urlPexels = `https://api.pexels.com/v1/search?query=${word}&per_page=10`;
+      // const translator = new deepl.Translator(deeplApiKey);
 
       try {
         const response = await axios.get(url);
